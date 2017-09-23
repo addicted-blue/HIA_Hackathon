@@ -1,0 +1,67 @@
+<header id="header" data-ng-include="'template/header.html'"
+	data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+	<aside id="sidebar" data-ng-include="'template/sidebar-left.html'"
+		data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+	<aside id="chat" data-ng-include="'template/sidebar-right.html'"
+		data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
+	<section id="content">
+
+		<div class="container">
+			<div class="block-header">
+				<h2>Regional Transport Price</h2>
+
+
+
+			</div>
+
+
+
+			<div>
+
+				<br />
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+
+						<i class="zmdi zmdi-trending-up"></i> Rate Chart For Region
+
+						<ul class="actions"
+							style="float: right; top: -5px; position: relative;">
+							<li class="dropdown" dropdown><a href="" dropdown-toggle>
+									<i class="zmdi zmdi-more-vert" style="color: #fff;"></i>
+							</a>
+
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li ng-repeat="chartType in chartTypes track by $index"
+										ng-model="selectedChartType"><a
+										ng-click="onChartTypeChange(chartType)">{{chartType}}</a></li>
+
+									<li><a href="/api/getExcelData/1" target="_blank">API</a></li>
+								</ul></li>
+						</ul>
+
+
+						<span style="float: right;"><input type="checkbox"
+							ng-click="gridCheckBox()"> <span
+							style="top: -2px; position: relative; padding-right: 10px;">Show
+								Grid</span></span>
+
+					</div>
+					<div class="panel-body">
+						<div id="rateChartBar" ng-init="getAtalantaData()"></div>
+					</div>
+				</div>
+
+
+
+
+			</div>
+		</div>
+
+	</section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>

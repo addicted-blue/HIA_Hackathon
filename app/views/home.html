@@ -1,0 +1,96 @@
+<header id="header" data-ng-include="'template/header.html'"
+	data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+	<aside id="sidebar" data-ng-include="'template/sidebar-left.html'"
+		data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+	<aside id="chat" data-ng-include="'template/sidebar-right.html'"
+		data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
+	<section id="content">
+
+		<div class="container">
+			<div class="block-header">
+				<h2>Market Movement / Cost Visualization</h2>
+
+				<!-- <ul class="actions">
+
+					<li class="dropdown" dropdown><a href="" dropdown-toggle>
+							<i class="zmdi zmdi-more-vert"></i>
+					</a>
+
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="">Refresh</a></li>
+						</ul></li>
+				</ul> -->
+
+			</div>
+
+
+			<div ng-if="graphs.isFileLoaded">
+			
+				<div class="panel panel-primary" ng-controller="OrderVolumeMapCntrl">
+					<div class="panel-heading">
+
+						<i class="zmdi zmdi-trending-up"></i> City order
+					</div>
+					<div class="panel-body">
+						<div id="volumeMaps"></div>
+						<div id="sliderContainer">
+						    <input id="timeslide" type="range" min="0" max="11" value="0" step="1"/><br>
+						    <span id="range">January</span>
+						</div>
+						<button ng-click="exportPNG()">Export</button>
+					</div>
+				</div>
+				
+				<br /><br />
+			
+				<div ng-controller="MapCntrl">
+				
+				
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							
+							<i class="zmdi zmdi-trending-up"></i>Volume of freight movement
+						</div>
+						<div class="panel-body" style="text-align: center;">
+							<span><b>Origin City:</b> </span>
+								<select ng-model="selectedOriginCity" ng-change="updateMap(this)">
+									<option ng-repeat="item in originCities | orderBy:'cityName'" value="{{item.cityName}}">
+										{{item.cityName}}
+									</option>
+								</select><br /><br />
+							<div ng-if="isSourceSelected">
+								<p><b>City:</b> {{selectedOriginCity.toUpperCase()}}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Total Orders:</b> {{count/2}}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Total Transportation Cost Incurred:</b> {{totalTransportationCost | currency}}</p>
+							</div>
+							<div id="maps"></div>
+							<button ng-click="exportPNG()" style="float: left;">Export</button>
+						</div>
+					</div>
+				</div>
+				<br /><br />
+				
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+
+						<i class="zmdi zmdi-trending-up"></i> State-wise Transportation Cost 
+					</div>
+					<div class="panel-body" ng-controller="StateMapCntrl">
+						<div id="stateMap"></div>
+						<button ng-click="exportPNG()">Export</button>
+					</div>
+				</div>
+			
+				
+				
+			</div>
+
+		</div>
+	</section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>

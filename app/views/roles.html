@@ -1,0 +1,181 @@
+<header id="header" data-ng-include="'template/header.html'"
+	data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+	<aside id="sidebar" data-ng-include="'template/sidebar-left.html'"
+		data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+	<aside id="chat" data-ng-include="'template/sidebar-right.html'"
+		data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
+	<section id="content" ng-controller="rolesCtrl">
+
+		<div class="container">
+			<div class="block-header">
+				<h2>Roles</h2>
+                
+                <ul class="actions">
+					<li class="dropdown" dropdown>
+                        <a href="" dropdown-toggle>
+							<i class="zmdi zmdi-more-vert"></i>
+					   </a>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="">Refresh</a></li>
+						</ul>
+                    </li>
+				</ul>
+			</div>
+            
+            
+            <div class="mini-charts">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="mini-charts-item bgm-cyan">
+                            <div class="clearfix">
+                                <div class="chart">
+                                    <i class="fa fa-users font-icon"></i>
+                                </div>
+                                <div class="count">
+                                    <small>Total Accounts</small>
+                                    <h2>{{userList.length}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="mini-charts-item bgm-lightgreen">
+                            <div class="clearfix">
+                                <div class="chart">
+                                    <i class="fa fa-user font-icon"></i>
+                                </div>
+                                <div class="count">
+                                    <small>Admin</small>
+                                    <h2>{{adminCount}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="mini-charts-item bgm-orange">
+                            <div class="clearfix">
+                                <div class="chart">
+                                    <i class="fa fa-user font-icon"></i>
+                                </div>
+                                <div class="count">
+                                    <small>User</small>
+                                    <h2>{{userCount}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="mini-charts-item bgm-bluegray">
+                            <div class="clearfix">
+                                <div class="chart">
+                                    <i class="fa fa-user font-icon"></i>
+                                </div>
+                                <div class="count">
+                                    <small>Vendor</small>
+                                    <h2>{{vendorCount}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        
+            
+
+		</div>
+        
+        <div class="container">
+            <div class="">
+                    <table class="table table-responsive table-stripped">
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Mobile</th>
+                            <th>Role</th>
+                        </tr>
+
+                        <tr ng-repeat="user in userList">
+                            <td>{{user.name}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.mobile}}</td>
+                            <td>
+                                <select class="form-control" ng-model="user.role" ng-change="updateUserRole(user)">
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                    <option value="vendor">Vendor</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+            </div>
+        </div>
+        
+        
+        <!-- Modal -->
+        <div id="createTicket" class="modal fade" role="dialog" ng-controller="ticketCtrl">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Ticket</h4>
+              </div>
+              <div class="modal-body">
+
+                  <div class="container-fluid">
+
+                        <div class="col-md-12" style="padding-bottom: 10px;">
+                            <select class="form-control" ng-model="ticket.requestType">
+                                <option value="select">Select Request Type</option>
+                                <option value="roads">Roads</option>
+                                <option value="streetLight">Street Lights</option>
+                                <option value="dustbin">Dustbins</option>
+                                <option value="garden">Gardens/Parks</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12" style="padding-bottom: 10px;">
+                            <input type="text" class="form-control" placeholder="Description" ng-model="ticket.description">  
+                        </div>
+
+                        <div class="col-md-12" style="padding-bottom: 10px;">
+                            <input type="text" class="form-control" placeholder="Address" ng-model="ticket.address">
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div id="map" style="height: 300px"></div>
+                        </div>
+                        
+                        <div class="col-md-12" style="text-align: center;padding-top: 10px;">
+                            <button class="btn btn-default" ng-click="clearTicket()">Clear</button>&nbsp;
+                            <button class="btn btn-primary" ng-click="addTicket()">Submit</button>
+                        </div>
+                  </div>  
+
+              </div>
+              <div class="modal-footer" style="padding-top: 10px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        
+        
+	</section>
+</section>
+
+
+
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>
