@@ -129,7 +129,7 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', 'mai
             data: {
                 columns: [
                     ['data1', 30],
-                    ['data2', 120],
+                    ['data2', 120]
                 ],
                 type: 'pie',
             }
