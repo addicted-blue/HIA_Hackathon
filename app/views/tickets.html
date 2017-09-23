@@ -8,22 +8,11 @@
 	<aside id="chat" data-ng-include="'template/sidebar-right.html'"
 		data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
 
-	<section id="content" ng-controller="rolesCtrl">
+	<section id="content" ng-controller="ticketCtrl">
 
 		<div class="container">
 			<div class="block-header">
-				<h2>Roles</h2>
-                
-                <ul class="actions">
-					<li class="dropdown" dropdown>
-                        <a href="" dropdown-toggle>
-							<i class="zmdi zmdi-more-vert"></i>
-					   </a>
-						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="">Refresh</a></li>
-						</ul>
-                    </li>
-				</ul>
+				<h2>My Tickets</h2>
 			</div>
             
             
@@ -36,8 +25,8 @@
                                     <i class="fa fa-users font-icon"></i>
                                 </div>
                                 <div class="count">
-                                    <small>Total Accounts</small>
-                                    <h2>{{userList.length}}</h2>
+                                    <small>Total Tickets</small>
+                                    <h2>{{totalTickets}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -50,8 +39,8 @@
                                     <i class="fa fa-user font-icon"></i>
                                 </div>
                                 <div class="count">
-                                    <small>Admin</small>
-                                    <h2>{{adminCount}}</h2>
+                                    <small>Open</small>
+                                    <h2>{{openTicketCount}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -64,8 +53,8 @@
                                     <i class="fa fa-user font-icon"></i>
                                 </div>
                                 <div class="count">
-                                    <small>User</small>
-                                    <h2>{{userCount}}</h2>
+                                    <small>Closed</small>
+                                    <h2>{{closeTicketCount}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -78,8 +67,8 @@
                                     <i class="fa fa-user font-icon"></i>
                                 </div>
                                 <div class="count">
-                                    <small>Vendor</small>
-                                    <h2>{{vendorCount}}</h2>
+                                    <small>Rejected</small>
+                                    <h2>{{rejectedTicketCount}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -95,23 +84,20 @@
             <div class="">
                     <table class="table table-responsive table-stripped">
                         <tr>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Mobile</th>
-                            <th>Role</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Assignee</th>
+                            <th>Status</th>
                         </tr>
 
-                        <tr ng-repeat="user in userList">
-                            <td>{{user.name}}</td>
-                            <td>{{user.username}}</td>
-                            <td>{{user.mobile}}</td>
-                            <td>
-                                <select class="form-control" ng-model="user.role" ng-change="updateUserRole(user)">
-                                    <option value="admin">Admin</option>
-                                    <option value="user">User</option>
-                                    <option value="vendor">Vendor</option>
-                                </select>
-                            </td>
+                        <tr ng-repeat="ticket in ticketList">
+                            <td>{{ticket.requestType}}</td>
+                            <td>{{ticket.description}}</td>
+                            <td>{{ticket.address}}</td>
+                            <td>-</td>
+                            <td>{{ticket.status}}</td>
+                            
                         </tr>
                     </table>
 

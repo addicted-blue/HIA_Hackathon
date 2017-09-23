@@ -4,3 +4,7 @@
     padding: 0px 30px;
     float: left;
 }
+
+tr{
+	cursor: pointer !important;
+}

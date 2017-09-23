@@ -35,6 +35,33 @@ app
             
         }
         
+        $scope.getTicketById = function(id){
+        	
+        	$scope.totalTickets = 0;
+            $scope.openTicketCount = 0;
+            $scope.closeTicketCount = 0;
+            $scope.rejectedTicketCount = 0;
+        	
+        	appService.getTicketById(id).success(function(response){
+                $scope.ticketList = response;
+                $scope.totalTickets = $scope.ticketList.length;
+                for(ticket of $scope.ticketList){
+                    if(ticket.status == 'open'){
+                        $scope.openTicketCount++;
+                    }else if(ticket.status == 'close'){
+                        $scope.closeTicketCount++;
+                    }else if(user.role == 'rejected'){
+                        $scope.rejectedTicketCount++
+                    }
+                }
+        		
+        		console.log(response);
+            });
+        	
+        }
+        
+        $scope.getTicketById(localStorage.getItem('id'));
+        
         
         
         $scope.location = '';

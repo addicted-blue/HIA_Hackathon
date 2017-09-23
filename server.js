@@ -49,7 +49,7 @@ app.get('/getTickets', function(req, res){
     });
 });
 
-app.get('/getTicketsByUser/:id', function(req, res){
+app.get('/getTicketsById/:id', function(req, res){
     Ticket.find({ createdBy: req.params.id }, function(err, data){
        if(err){
            return res.json(err);

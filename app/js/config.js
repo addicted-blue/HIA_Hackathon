@@ -68,5 +68,10 @@ app
                 url: '/roles',
                 templateUrl: 'views/roles.html'
             })
+            
+            .state ('tickets', {
+                url: '/tickets',
+                templateUrl: 'views/tickets.html'
+            })
 			
     });
