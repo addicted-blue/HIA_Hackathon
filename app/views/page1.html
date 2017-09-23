@@ -1,158 +1,90 @@
 <header id="header" data-ng-include="'template/header.html'"
-	data-ng-controller="headerCtrl as hctrl"></header>
-
+        data-ng-controller="headerCtrl as hctrl"></header>
 <section id="main">
-	<aside id="sidebar" data-ng-include="'template/sidebar-left.html'"
-		data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+    <aside id="sidebar" data-ng-include="'template/sidebar-left.html'"
+           data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+    <aside id="chat" data-ng-include="'template/sidebar-right.html'"
+           data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+    <section id="content" ng-init="UpdateBarChart()">
+        <div class="container">
+            <div class="block-header">
+                <h2>Statistics</h2>
+            </div>
 
-	<aside id="chat" data-ng-include="'template/sidebar-right.html'"
-		data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+            <br />
+            <div>
 
-	<section id="content">
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="zmdi zmdi-trending-up"></i> Area Wise Statics
+                        </div>
+                        <div class="panel-body">
+                            <div id="modelAreaChart"></div>
+                        </div>
+                    </div>
+                </div>
 
-		<div class="container">
-			<div class="block-header">
-				<h2>Statistics</h2>
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="zmdi zmdi-trending-up"></i> Ticket Status Statics
+                        </div>
+                        <div class="panel-body">
+                            <div id="modelTicketStatusChart"></div>
+                        </div>
+                    </div>
+                </div>
 
-				<!-- <ul class="actions">
-					<li class="dropdown" dropdown><a href="" dropdown-toggle>
-							<i class="zmdi zmdi-more-vert"></i>
-					</a>
+                <div class="col-md-4">
+                    <div class="panel panel-primary" style="min-height: 386px;">
+                        <div class="panel-heading">
+                            <i class="zmdi zmdi-trending-up"></i> Asset Wise Statics
+                        </div>
+                        <div class="panel-body">
+                            <div id="modelAssetWiseChart"></div>
+                        </div>
+                    </div>
+                </div>
 
-						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="">Refresh</a></li>
-						</ul></li>
-				</ul> -->
+                <div style="clear:both"></div>
+                <br />
+                <br />
 
-			</div>
-
-			<div style="text-align: center;" ng-init="UpdateBarChart()">
-				<span><b>Origin City:</b> </span>
-				<!-- <select
-					ng-options="item.id as item.cityName for item in originCities"
-					ng-model="selectedOriginCity" ng-change="UpdateBarChart(this)"></select> -->
-				<select ng-model="selectedOriginCity"
-					ng-change="UpdateBarChart(this)">
-					<option ng-repeat="item in originCities" value="{{item.id}}">
-						{{item.cityName}}</option>
-				</select>
-			</div>
-			<br />
-			<div>
-
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-
-						<i class="zmdi zmdi-trending-up"></i> Market Price Comparison
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <i class="zmdi zmdi-trending-up"></i> Month wise ticket analysis
 
 
-						<ul class="actions"
-							style="float: right; top: -5px; position: relative;">
-							<li class="dropdown" dropdown><a href="" dropdown-toggle>
-									<i class="zmdi zmdi-more-vert" style="color: #fff;"></i>
-							</a>
+                        <ul class="actions"
+                            style="float: right; top: -5px; position: relative;">
+                            <li class="dropdown" dropdown>
+                                <a href="" dropdown-toggle>
+                                    <i class="zmdi zmdi-more-vert" style="color: #fff;"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li ng-repeat="chartType in chartTypesPE track by $index"
+                                        ng-model="selectedChartTypePE">
+                                        <a ng-click="changePriceEstimation(chartType)">{{chartType}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <span style="float: right;">
+                            <input type="checkbox"
+                                   ng-click="gridCheckBoxPE()"> <span style="top: -2px; position: relative; padding-right: 10px;">
+                                Show
+                                Grid
+                            </span>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div id="modelBar"></div>
+                    </div>
+                </div>
 
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li ng-repeat="chartType in chartTypesPE track by $index"
-										ng-model="selectedChartTypePE"><a
-										ng-click="changePriceEstimation(chartType)">{{chartType}}</a></li>
-								</ul></li>
-						</ul>
-
-						<span style="float: right;"><input type="checkbox"
-							ng-click="gridCheckBoxPE()"> <span
-							style="top: -2px; position: relative; padding-right: 10px;">Show
-								Grid</span></span>
-
-					</div>
-					<div class="panel-body">
-						<div id="modelBar"></div>
-					</div>
-				</div>
-
-				<br /> <br />
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-
-						<i class="zmdi zmdi-trending-up"></i> XPO & Market Cost Comparison
-					</div>
-					<div class="panel-body">
-						<div id="modelCostBar"></div>
-					</div>
-				</div>
-
-				<br /> <br />
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-
-						<i class="zmdi zmdi-trending-up"></i> XPO Profit per mile
-					</div>
-					<div class="panel-body">
-						<div id="modelXPOProfitBar"></div>
-					</div>
-				</div>
-
-				<br /> <br />
-
-				<div class="col-md-4">
-					<div class="panel panel-primary" style="min-height: 386px;">
-						<div class="panel-heading">
-
-							<i class="zmdi zmdi-trending-up"></i> Hot spot areas
-						</div>
-						<div class="panel-body">
-							<p ng-hide="isNutralFrequency">Least Frequent Destinations:
-							<ul class="list-group">
-								<li class="list-group-item list-group-item-danger" ng-repeat="item in leastFrequentDestination">
-									{{item.val}}</li>
-							</ul>
-							</p>
-
-							<p ng-hide="isNutralFrequency">Most Frequent Destinations:
-							<ul class="list-group">
-								<li class="list-group-item list-group-item-info" ng-repeat="item in mostFrequentDestination">
-									{{item.val}}</li>
-							</ul>
-							</p>
-
-							<p ng-show="isNutralFrequency">Fright movement is normal for
-								destinations:
-							<ul class="list-group" ng-show="isNutralFrequency">
-								<li class="list-group-item list-group-item-success" ng-repeat="item in mostFrequentDestination">
-									{{item.val}}</li>
-							</ul>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-
-							<i class="zmdi zmdi-trending-up"></i> Orders received per month
-						</div>
-						<div class="panel-body">
-							<div id="modelBarDate"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="panel panel-primary" style="min-height: 386px;">
-						<div class="panel-heading">
-
-							<i class="zmdi zmdi-trending-up"></i> Overall Profit
-						</div>
-						<div class="panel-body">
-							<div id="modelGaugeChart"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</section>
+            </div>
+        </div>
+    </section>
 </section>
-
 <footer id="footer" data-ng-include="'template/footer.html'"></footer>
