@@ -3,7 +3,7 @@ app
     // Base controller for common functions
     // =========================================================================
 
-.controller('ticketCtrl', function($scope, $http, appService, growlService){
+.controller('adminTicketCtrl', function($scope, $http, appService, growlService){
 
     	$scope.searchTicket = '';
         $scope.userList = {};
@@ -29,7 +29,7 @@ app
             $scope.closeTicketCount = 0;
             $scope.rejectedTicketCount = 0;
         	
-        	appService.getTicketById(id).success(function(response){
+        	appService.getTickets().success(function(response){
                 $scope.ticketList = response;
                 $scope.totalTickets = $scope.ticketList.length;
                 for(ticket of $scope.ticketList){

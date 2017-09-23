@@ -73,5 +73,10 @@ app
                 url: '/tickets',
                 templateUrl: 'views/tickets.html'
             })
+            
+            .state ('admin-ticket', {
+                url: '/admin-ticket',
+                templateUrl: 'views/admin-ticket.html'
+            })
 			
     });
