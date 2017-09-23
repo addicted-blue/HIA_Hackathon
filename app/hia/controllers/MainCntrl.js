@@ -148,6 +148,31 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', 'mai
             }
         });
     }
+    
+    $scope.getTickets = function(){
+    	
+    	$scope.totalTickets = 0;
+        $scope.openTicketCount = 0;
+        $scope.closeTicketCount = 0;
+        $scope.rejectedTicketCount = 0;
+    	
+    	appService.getTickets().success(function(response){
+            $scope.ticketList = response;
+            $scope.totalTickets = $scope.ticketList.length;
+            for(ticket of $scope.ticketList){
+                if(ticket.status == 'open'){
+                    $scope.openTicketCount++;
+                }else if(ticket.status == 'close'){
+                    $scope.closeTicketCount++;
+                }else if(user.role == 'rejected'){
+                    $scope.rejectedTicketCount++
+                }
+            }
+    		console.log(response);
+        });
+    	
+    }
+    
 
     // modelTicketStatusChart
     // modelAssetWiseChart
