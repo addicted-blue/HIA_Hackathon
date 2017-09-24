@@ -72,6 +72,8 @@ app
                 	$scope.getTicketById(localStorage.getItem('id'));
                 },1000);
                 
+                
+                $('#createTicket').modal('toggle');
             });
             
         }

@@ -43,6 +43,8 @@ app
                 	}else{
                 		growlService.growl('Ticket Rejected', 'inverse');
                 	}
+                	
+                	$('#viewTicket').modal('toggle');
                     
                 });
         	
