@@ -58,6 +58,15 @@ app.get('/getTicketsById/:id', function(req, res){
     });
 });
 
+app.get('/getAssignedTicketsById/:id', function(req, res){
+    Ticket.find({ assignedTo: req.params.id }, function(err, data){
+       if(err){
+           return res.json(err);
+       }
+        return res.json(data);
+    });
+});
+
 
 app.get('/getAssignedTickets/:id', function(req, res){
     Ticket.find({ assignedTo: req.params.id }, function(err, data){
@@ -74,7 +83,7 @@ app.put('/assignedTicket', (req, res)=>{
         Ticket.findOne({ _id: req.body._id }, function (err, data){
             data.assignedTo = req.body.assignedTo;
             data.assignedToName = req.body.assignedToName;
-            data.status = 'in progress';
+            data.status = req.body.status;
             data.comments = req.body.comments;
             data.save(function(err) {
                 if(err)
@@ -83,6 +92,20 @@ app.put('/assignedTicket', (req, res)=>{
             });
         });
         
+});
+
+app.put('/closeTicket', (req, res)=>{
+    
+    Ticket.findOne({ _id: req.body._id }, function (err, data){
+        data.status = req.body.status;
+        data.vendorComments = req.body.vendorComments;
+        data.save(function(err) {
+            if(err)
+                return res.json(err);
+            res.json('Ticket closed');
+        });
+    });
+    
 });
 
 

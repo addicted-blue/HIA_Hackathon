@@ -48,6 +48,20 @@ app.service('appService', ['$http', function($http){
         });
     }
     
+    s.closeTicket = function(data){
+        var result = '/closeTicket';
+        return $http({
+            method: 'PUT',
+            url: result,
+            data: data
+        });
+    }
+   
+    
+    s.getAssignedTicketsById = function(id){
+    	return $http.get('/getAssignedTicketsById/'+id);
+    }
+    
     s.saveTicket = function(data){
         var result = '/saveTicket';
         return $http({

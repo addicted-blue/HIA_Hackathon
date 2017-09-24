@@ -1,4 +1,4 @@
-<div ng-controller="adminTicketCtrl">
+<div ng-controller="vendorTicketCtrl">
 
 <header id="header" data-ng-include="'template/header.html'"
 	data-ng-controller="headerCtrl as hctrl"></header>
@@ -181,18 +181,25 @@
                         </div>
                         
                         <div class="col-md-2" style="padding-bottom: 10px">
-                        	Comments:
+                        	Comments by Adminstrator:
                         </div>
                         <div class="col-md-10" style="padding-bottom: 10px">
                         	<textarea rows="4" cols="" ng-model="activeTicket.comments" class="form-control"></textarea>
                         </div>
                         
+                        <div class="col-md-2" style="padding-bottom: 10px">
+                        	Comments
+                        </div>
+                        <div class="col-md-10" style="padding-bottom: 10px">
+                        	<textarea rows="4" cols="" ng-model="activeTicket.vendorComments" class="form-control"></textarea>
+                        </div>
                         
                         
                         
-                        <div class="col-md-12" style="text-align: center;padding-top: 10px;" ng-if="!activeTicket.assignedToName">
-                            <button class="btn btn-default" ng-click="assignTicket(activeTicket, 'reject')">Reject</button>&nbsp;
-                            <button class="btn btn-primary" ng-click="assignTicket(activeTicket, 'in progress')">Assign</button>
+                        
+                        <div class="col-md-12" style="text-align: center;padding-top: 10px;" ng-if="!(activeTicket.status == 'close' || activeTicket.status == 'reject')">
+                            <button class="btn btn-default" ng-click="closeTicket(activeTicket, 'reject')">Reject</button>&nbsp;
+                            <button class="btn btn-primary" ng-click="closeTicket(activeTicket, 'close')">Closed/Complete</button>
                         </div>
                   </div>  
 

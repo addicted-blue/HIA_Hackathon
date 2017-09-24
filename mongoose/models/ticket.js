@@ -15,7 +15,8 @@ var ticketSchema = mongoose.Schema({
 	assignedToName: String,
 	createdBy: String,
 	createdByName: String,
-	comments: String
+	comments: String,
+	vendorComments: String
 });
 
 module.exports = mongoose.model('ticket', ticketSchema);

@@ -78,5 +78,10 @@ app
                 url: '/admin-ticket',
                 templateUrl: 'views/admin-ticket.html'
             })
+            
+            .state ('vendor-ticket', {
+                url: '/vendor-ticket',
+                templateUrl: 'views/vendor-ticket.html'
+            })
 			
     });

@@ -3,7 +3,7 @@ app
     // Base controller for common functions
     // =========================================================================
 
-.controller('adminTicketCtrl', function($scope, $http, appService, growlService){
+.controller('vendorTicketCtrl', function($scope, $http, appService, growlService){
 
     	$scope.searchTicket = '';
         $scope.userList = {};
@@ -16,34 +16,24 @@ app
                 $scope.ticket.address = '';
         }
         
-        $scope.assignTicket = function(ticket, status){
+        $scope.closeTicket = function(ticket, status){
         	
         	console.log(ticket);
-        	
-        	if(status == 'in progress'){
-            	assignedTo = ticket.assignedTo._id;
-                assignedToName = ticket.assignedTo.name;
-            }else{
-            	assignedTo = '';
-                assignedToName = '';
-            }
-        	
         	var data = {
                     '_id': ticket._id,
-                    'assignedTo' : assignedTo,
-                    'assignedToName' : assignedToName,
-                    'comments' : ticket.comments,
+                    'vendorComments' : ticket.comments,
                     'status': status
                 };
                 
-                appService.assignedTicket(data).then(function(response){
+                appService.closeTicket(data).then(function(response){
                     //$scope.loadUsers();
-                	if(status == 'in progress'){                		
-                		growlService.growl('Assigned to '+ticket.assignedTo.name, 'inverse');
+                	if(status == 'close'){                		
+                		growlService.growl('Ticket Closed', 'inverse');
                 	}else{
                 		growlService.growl('Ticket Rejected', 'inverse');
                 	}
                     
+                	$('#viewTicket').modal('toggle');
                 });
         	
         }
@@ -58,14 +48,14 @@ app
         });
         
         
-        $scope.getTicketById = function(id){
+        $scope.getAssignedTicketsById = function(id){
         	
         	$scope.totalTickets = 0;
             $scope.openTicketCount = 0;
             $scope.closeTicketCount = 0;
             $scope.inProgressTicketCount = 0;
         	
-        	appService.getTickets().success(function(response){
+        	appService.getAssignedTicketsById(id).success(function(response){
                 $scope.ticketList = response;
                 $scope.totalTickets = $scope.ticketList.length;
                 for(ticket of $scope.ticketList){
@@ -92,7 +82,7 @@ app
         	$('#viewTicket').modal();
         }
         
-        $scope.getTicketById(localStorage.getItem('id'));
+        $scope.getAssignedTicketsById(localStorage.getItem('id'));
         
         
         $scope.addTicket = function(){
