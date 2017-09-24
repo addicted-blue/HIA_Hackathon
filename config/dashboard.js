@@ -1,15 +1,21 @@
 module.exports = {
 	"admin": {
 		"home": true,
-		"help":false
+		"admin":true,
+		"user": false,
+		"vendor": false
 	},
 	"user": {
 		"home": true,
-		"help":false
+		"admin":false,
+		"user": true,
+		"vendor": false
 	},
 	"vendor": {
 		"home": true,
-		"help":false
+		"admin":false,
+		"user": false,
+		"vendor": true
 	}
 	
 }
