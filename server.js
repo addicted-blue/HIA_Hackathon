@@ -92,6 +92,15 @@ app.get('/getUsers', function(req, res){
     });
 });
 
+app.get('/getVendors', function(req, res){
+    User.find({role: 'vendor'}, function(err, data){
+       if(err){
+           return res.json(err);
+       }
+        return res.json(data);
+    });
+});
+
 
 app.put('/updateUserRole', (req, res)=>{
        

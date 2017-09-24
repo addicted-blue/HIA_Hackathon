@@ -93,16 +93,16 @@
                             <th>Category</th>
                             <th>Description</th>
                             <th>Location</th>
-                            <th>Assignee</th>
                             <th>Status</th>
+                            <th>Created At</th>
                         </tr>
 
                         <tr ng-repeat="ticket in ticketList | filter: searchTicket">
                             <td>{{ticket.requestType}}</td>
                             <td>{{ticket.description}}</td>
                             <td>{{ticket.address}}</td>
-                            <td>-</td>
                             <td>{{ticket.status}}</td>
+                            <td am-time-ago="ticket.createdOn"></td>
                             
                         </tr>
                         <tr ng-show="ticketList.length==0"style="text-align: center;">

@@ -1,4 +1,5 @@
 var app = angular.module('app', [
+    'angularMoment',
     'ngAnimate',
     'ngResource',
     'ui.router',

@@ -21,6 +21,10 @@ app
         	$scope.searchTicket = status;
         }
         
+        appService.getVendors().success(function(response){
+            console.log(response);
+        });
+        
         
         $scope.getTicketById = function(id){
         	

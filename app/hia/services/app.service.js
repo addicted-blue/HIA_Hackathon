@@ -25,6 +25,10 @@ app.service('appService', ['$http', function($http){
     	return $http.get('/getTickets');
     }
     
+    s.getVendors = function(id){
+    	return $http.get('/getVendors');
+    }
+    
     
     s.updateUserRole = function(data){
         var result = '/updateUserRole';
