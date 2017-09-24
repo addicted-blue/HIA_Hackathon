@@ -90,6 +90,7 @@
             <div class="">
                     <table class="table table-responsive table-stripped">
                         <tr>
+                        	<th>Name</th>
                             <th>Category</th>
                             <th>Description</th>
                             <th>Location</th>
@@ -99,16 +100,22 @@
                         </tr>
 
                         <tr ng-repeat="ticket in ticketList | filter: searchTicket">
+                            <td>{{ticket.createdByName}}</td>
                             <td>{{ticket.requestType}}</td>
                             <td>{{ticket.description}}</td>
                             <td style="max-width: 250px;">{{ticket.address}}</td>
-                            <td>-</td>
+                            <td>
+                            	<select ng-model="selectedVendor">
+                            		<option value="select"></option>
+                            		<option ng-repeat="vendor in vendorList" value="vendor._id">{{vendor.name}}</option>
+                            	</select>
+                            </td>
                             <td>{{ticket.status}}</td>
                             <td am-time-ago="ticket.createdOn"></td>
                             
                         </tr>
                         <tr ng-show="ticketList.length==0"style="text-align: center;">
-                        	<td colspan="5">No Record Found</td>
+                        	<td colspan="7">No Record Found</td>
                         </tr>
                     </table>
 

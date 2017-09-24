@@ -12,7 +12,9 @@ var ticketSchema = mongoose.Schema({
 	createdOn: {type: Date, default: Date.now},
 	severity: {type: String, default: 'low'},
 	assignedTo: String,
-	createdBy: String
+	assignedToName: String,
+	createdBy: String,
+	createdByName: String
 });
 
 module.exports = mongoose.model('ticket', ticketSchema);

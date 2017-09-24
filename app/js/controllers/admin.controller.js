@@ -21,8 +21,9 @@ app
         	$scope.searchTicket = status;
         }
         
+        $scope.selectedVendor = 'select';
         appService.getVendors().success(function(response){
-            console.log(response);
+            $scope.vendorList = response;
         });
         
         
@@ -64,6 +65,7 @@ app
                 'description': $scope.ticket.description,
                 'address': $scope.ticket.address,
                 'createdBy': localStorage.getItem('id'),
+                'createdByName': localStorage.getItem('name'),
                 'latitude': $scope.ticket.latitude,
                 'longitude': $scope.ticket.longitude
             };

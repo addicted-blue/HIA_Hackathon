@@ -124,6 +124,7 @@ app.post('/saveTicket', (req, res)=>{
         ticket.description = req.body.description;
         ticket.address     = req.body.address;
         ticket.createdBy   = req.body.createdBy;
+        ticket.createdByName = req.body.createdByName;
         ticket.latitude    = req.body.latitude;
         ticket.longitude   = req.body.longitude;
     
