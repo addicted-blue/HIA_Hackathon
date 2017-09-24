@@ -70,6 +70,8 @@ app
             appService.saveTicket(data).then(function(response){
                 //$scope.loadUsers();
                 growlService.growl('Ticket is created', 'inverse');
+                $scope.ticket = {};
+                $scope.ticket.requestType = 'select';
                 setTimeout(function(){
                 	$scope.getTicketById(localStorage.getItem('id'));
                 },1000);
