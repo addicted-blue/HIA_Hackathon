@@ -221,18 +221,6 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
                 },
                 data: {
                     rows: [
-                        //['Jan', getcount(janArray, "roads"), getcount(janArray, "streetLight"), getcount(janArray, "dustbin"), getcount(janArray, "dustbin"), getcount(janArray, "garden"), getcount(janArray, "others")],
-                        //['Feb', getcount(febArray, "roads"), getcount(febArray, "streetLight"), getcount(febArray, "dustbin"), getcount(febArray, "dustbin"), getcount(febArray, "garden"), getcount(febArray, "others")],
-                        //['Mar', getcount(marAry, "roads"), getcount(marAry, "streetLight"), getcount(marAry, "dustbin"), getcount(marAry, "dustbin"), getcount(marAry, "garden"), getcount(marAry, "others")],
-                        //['Apr', getcount(aprAry, "roads"), getcount(aprAry, "streetLight"), getcount(aprAry, "dustbin"), getcount(aprAry, "dustbin"), getcount(aprAry, "garden"), getcount(aprAry, "others")],
-                        //['May', getcount(mayAry, "roads"), getcount(mayAry, "streetLight"), getcount(mayAry, "dustbin"), getcount(mayAry, "dustbin"), getcount(mayAry, "garden"), getcount(mayAry, "others")],
-                        //['June', getcount(juneAry, "roads"), getcount(juneAry, "streetLight"), getcount(juneAry, "dustbin"), getcount(juneAry, "dustbin"), getcount(juneAry, "garden"), getcount(juneAry, "others")],
-                        //['July', getcount(julyAry, "roads"), getcount(julyAry, "streetLight"), getcount(julyAry, "dustbin"), getcount(julyAry, "dustbin"), getcount(julyAry, "garden"), getcount(julyAry, "others")],
-                        //['Aug', getcount(augAry, "roads"), getcount(augAry, "streetLight"), getcount(augAry, "dustbin"), getcount(augAry, "dustbin"), getcount(augAry, "garden"), getcount(augAry, "others")],
-                        //['Sep', getcount(sepAry, "roads"), getcount(sepAry, "streetLight"), getcount(sepAry, "dustbin"), getcount(sepAry, "dustbin"), getcount(sepAry, "garden"), getcount(sepAry, "others")],
-                        //['Oct', getcount(octAry, "roads"), getcount(octAry, "streetLight"), getcount(octAry, "dustbin"), getcount(octAry, "dustbin"), getcount(octAry, "garden"), getcount(octAry, "others")],
-                        //['Nov', getcount(novAry, "roads"), getcount(novAry, "streetLight"), getcount(novAry, "dustbin"), getcount(novAry, "dustbin"), getcount(novAry, "garden"), getcount(novAry, "others")],
-                        //['Dec', getcount(decAry, "roads"), getcount(decAry, "streetLight"), getcount(decAry, "dustbin"), getcount(decAry, "dustbin"), getcount(decAry, "garden"), getcount(decAry, "others")]
                         ['roads', "streetLight", "dustbin", "garden", "others"],
                         [getcount(janArray, "roads"), getcount(janArray, "streetLight"), getcount(janArray, "dustbin"), getcount(janArray, "garden"), getcount(janArray, "others")],
                         [getcount(febArray, "roads"), getcount(febArray, "streetLight"), getcount(febArray, "dustbin"), getcount(febArray, "garden"), getcount(febArray, "others")],
@@ -290,7 +278,7 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
 
         $scope.getAddressByLatLong = function () {
             var promises = [];
-
+            $scope.overCount = 0;
             for (var i = 0; i < $scope.ticketList.length; i++) {
                 var geocoder = new google.maps.Geocoder();
                 var location = new google.maps.LatLng($scope.ticketList[i].latitude, $scope.ticketList[i].longitude);
@@ -300,9 +288,10 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
             }
             //return promises;
         }
-
+        $scope.overCount = 0;
         $scope.generatePieAreaChart = function (results, status) {
-
+            if (status == "OVER_QUERY_LIMIT")
+                $scope.overCount++;
             if (status == google.maps.GeocoderStatus.OK) {
                 //for (var i = 0; i < results.length; i++) {
                 var add = results[0].formatted_address;
@@ -311,7 +300,7 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
                     $scope.address.push(ary[ary.length - 4]);
                 //}
             }
-            if ($scope.address.length == $scope.ticketList.length) {
+            if (($scope.address.length + $scope.overCount) == $scope.ticketList.length) {
                 var distances = {};
                 $.map($scope.address, function (e, i) {
                     distances[e] = (distances[e] || 0) + 1;
