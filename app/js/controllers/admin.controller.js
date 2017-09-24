@@ -16,6 +16,23 @@ app
                 $scope.ticket.address = '';
         }
         
+        $scope.assignTicket = function(ticket){
+        	
+        	console.log(ticket);
+        	var data = {
+                    '_id': ticket._id,
+                    'assignedTo' : ticket.assignedTo._id,
+                    'assignedToName' : ticket.assignedTo.name,
+                    'comments' : ticket.comments
+                };
+                
+                appService.assignedTicket(data).then(function(response){
+                    //$scope.loadUsers();
+                    growlService.growl('Assigned to '+ticket.assignedTo.name, 'inverse');
+                    
+                });
+        	
+        }
             
         $scope.filterTicketOnStatus = function(status){
         	$scope.searchTicket = status;
@@ -32,7 +49,7 @@ app
         	$scope.totalTickets = 0;
             $scope.openTicketCount = 0;
             $scope.closeTicketCount = 0;
-            $scope.rejectedTicketCount = 0;
+            $scope.inProgressTicketCount = 0;
         	
         	appService.getTickets().success(function(response){
                 $scope.ticketList = response;
@@ -42,8 +59,8 @@ app
                         $scope.openTicketCount++;
                     }else if(ticket.status == 'close'){
                         $scope.closeTicketCount++;
-                    }else if(user.role == 'rejected'){
-                        $scope.rejectedTicketCount++
+                    }else if(ticket.status == 'in progress'){
+                        $scope.inProgressTicketCount++
                     }
                 }
                 
@@ -52,6 +69,13 @@ app
         		console.log(response);
             });
         	
+        }
+        
+        
+        $scope.viewTicket = function(ticket){
+        	console.log(ticket);
+        	$scope.activeTicket = ticket;
+        	$('#viewTicket').modal();
         }
         
         $scope.getTicketById(localStorage.getItem('id'));

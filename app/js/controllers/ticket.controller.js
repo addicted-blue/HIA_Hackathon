@@ -27,7 +27,7 @@ app
         	$scope.totalTickets = 0;
             $scope.openTicketCount = 0;
             $scope.closeTicketCount = 0;
-            $scope.rejectedTicketCount = 0;
+            $scope.inProgressTicketCount = 0;
         	
         	appService.getTicketById(id).success(function(response){
                 $scope.ticketList = response;
@@ -37,8 +37,8 @@ app
                         $scope.openTicketCount++;
                     }else if(ticket.status == 'close'){
                         $scope.closeTicketCount++;
-                    }else if(user.role == 'rejected'){
-                        $scope.rejectedTicketCount++
+                    }else if(ticket.status == 'in progress'){
+                        $scope.inProgressTicketCount++
                     }
                 }
                 

@@ -73,6 +73,9 @@ app.put('/assignedTicket', (req, res)=>{
        
         Ticket.findOne({ _id: req.body._id }, function (err, data){
             data.assignedTo = req.body.assignedTo;
+            data.assignedToName = req.body.assignedToName;
+            data.status = 'in progress';
+            data.comments = req.body.comments;
             data.save(function(err) {
                 if(err)
                     return res.json(err);
