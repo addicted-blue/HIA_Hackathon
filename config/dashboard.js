@@ -6,5 +6,10 @@ module.exports = {
 	"user": {
 		"home": true,
 		"help":false
+	},
+	"vendor": {
+		"home": true,
+		"help":false
 	}
+	
 }

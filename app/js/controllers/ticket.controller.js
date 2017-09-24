@@ -22,6 +22,8 @@ app
         }
         
         
+        
+        
         $scope.getTicketById = function(id){
         	
         	$scope.totalTickets = 0;
@@ -201,6 +203,17 @@ app
 			$scope.ticket.address = "No address found";
 		$scope.$apply();
     }
+    
+    $scope.openPopup = function(){
+    	
+    }
+    
+    var center = new google.maps.LatLng(18.5941174,73.7081759);
+    
+    $('#createTicket').on('show.bs.modal', function(){
+    	google.maps.event.trigger($scope.map,'resize');
+    	$scope.maps.setCenter(center);
+    });
     
     
 });

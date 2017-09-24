@@ -29,6 +29,10 @@ app.service('appService', ['$http', function($http){
     	return $http.get('/getVendors');
     }
     
+    s.sendSms = function(toNumber, msg){
+    	return $http.get('/sms?toNumber='+toNumber+'&msg='+msg);
+    }
+    
     
     s.updateUserRole = function(data){
         var result = '/updateUserRole';

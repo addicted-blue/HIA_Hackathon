@@ -43,7 +43,9 @@ app
                 	}else{
                 		growlService.growl('Ticket Rejected', 'inverse');
                 	}
-                	
+                	appService.sendSms(ticket.assignedTo.mobile,'Hi '+ticket.assignedTo.name+' a ticket has been assigned in your name. Kindly look into it.').then(function(response){
+                		console.log('done');
+                	})
                 	$('#viewTicket').modal('toggle');
                     
                 });
