@@ -116,8 +116,8 @@ app
             link: function(scope, element, attrs) {
                 element.click(function(){
                      swal({   
-                        title: "Market Movement / Cost Visualization",   
-                        text: "Present a visualization strategy that highlights volume of freight movements. The visualization strategy should incorporate a methodology of basic statistics (i.e. the average cost to move between zones). Your visualization should also compare with third party index cost data.",   
+                        title: "Public Property Maintenance",   
+                        text: "Powered by HIA | MIDC",   
                         timer: 3000,   
                         showConfirmButton: false 
                     });

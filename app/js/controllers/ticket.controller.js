@@ -80,7 +80,7 @@ app
             		console.log('done');
             	})
             	
-            	appService.sendSms(localStorage.getItem('mobile'),'Hi'+localStorage.getItem('name')+' thank you for contacting us, we have logged a ticket for you issue and we will get back to you soon').then(function(response){
+            	appService.sendSms(localStorage.getItem('mobile'),'Hi '+localStorage.getItem('name')+' thank you for contacting us, we have logged a ticket for you issue and we will get back to you soon').then(function(response){
             		console.log('done');
             	})
                 

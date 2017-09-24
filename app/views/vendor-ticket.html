@@ -90,6 +90,7 @@
             <div class="">
                     <table class="table table-responsive table-stripped">
                         <tr>
+                        	<th>Ticket Id</th>
                         	<th>Name</th>
                             <th>Category</th>
                             <th>Description</th>
@@ -100,6 +101,7 @@
                         </tr>
 
                         <tr ng-repeat="ticket in ticketList | filter: searchTicket" ng-click="viewTicket(ticket)">
+                        	<td>RITM{{ticket._id.substr(ticket._id.length - 3) | uppercase}}</td>
                             <td>{{ticket.createdByName}}</td>
                             <td>{{ticket.requestType}}</td>
                             <td>{{ticket.description}}</td>
