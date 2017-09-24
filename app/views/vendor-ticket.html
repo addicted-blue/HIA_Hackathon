@@ -142,21 +142,15 @@
                         	Request Type:
                         </div>
                         <div class="col-md-10" style="padding-bottom: 10px;">
-                            <select class="form-control" ng-model="activeTicket.requestType">
-                                <option value="select">Select Request Type</option>
-                                <option value="roads">Roads</option>
-                                <option value="streetLight">Street Lights</option>
-                                <option value="dustbin">Dustbins</option>
-                                <option value="garden">Gardens/Parks</option>
-                                <option value="others">Others</option>
-                            </select>
+                            <span class="form-control" ng-bind="activeTicket.requestType">
+                            </span>
                         </div>
                         
                         <div class="col-md-2" style="padding-bottom: 10px">
                         	Description:
                         </div>
                         <div class="col-md-10" style="padding-bottom: 10px;">
-                            <input type="text" class="form-control" placeholder="Description" ng-model="activeTicket.description">  
+                            <span type="text" class="form-control" placeholder="Description" ng-bind="activeTicket.description">  </span>
                         </div>
 
 						<div class="col-md-2" style="padding-bottom: 10px">
@@ -164,27 +158,25 @@
                         </div>
                         
                         <div class="col-md-10" style="padding-bottom: 10px;">
-                        	<i class="fa fa-search" style="right: 25px;top: 8px;position: absolute;cursor: pointer;font-size: 20px;" ng-click="getMaps()"></i>
-                            <input type="text" class="form-control" placeholder="Address" ng-model="activeTicket.address">
-                            
+                            <span type="text" class="form-control" placeholder="Address" ng-bind="activeTicket.address"></span>
                         </div>
                         
-                        <div class="col-md-2" style="padding-bottom: 10px">
+                        <!--<div class="col-md-2" style="padding-bottom: 10px">
                         	Assigned To:
                         </div>
                         <div class="col-md-10" style="padding-bottom: 10px" ng-if="!activeTicket.assignedToName">
                         	<select class="form-control" ng-options="vendor as vendor.name for vendor in vendorList" ng-model="activeTicket.assignedTo"></select>
-                        </div>
+                        </div>-->
                         
-                        <div class="col-md-10" style="padding-bottom: 10px" ng-if="activeTicket.assignedToName">
+                        <!--<div class="col-md-10" style="padding-bottom: 10px" ng-if="activeTicket.assignedToName">
                         	<select class="form-control" ng-options="vendor._id as vendor.name for vendor in vendorList" ng-model="activeTicket.assignedTo"></select>
-                        </div>
+                        </div>-->
                         
                         <div class="col-md-2" style="padding-bottom: 10px">
                         	Comments by Adminstrator:
                         </div>
                         <div class="col-md-10" style="padding-bottom: 10px">
-                        	<textarea rows="4" cols="" ng-model="activeTicket.comments" class="form-control"></textarea>
+                        	<textarea rows="4" cols="" ng-bind="activeTicket.comments" class="form-control" disabled></textarea>
                         </div>
                         
                         <div class="col-md-2" style="padding-bottom: 10px">

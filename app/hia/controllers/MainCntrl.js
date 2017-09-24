@@ -93,7 +93,7 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
                     $scope.closeTicketCount++;
                 } else if (ticket.status == 'rejected') {
                     $scope.rejectedTicketCount++
-                } else if (ticket.status == 'in-progress') {
+                } else if (ticket.status == 'in progress') {
                     $scope.inProgress++;
                 }
             }

@@ -35,7 +35,7 @@ app
                 	
                 	
                 	
-                    
+                    $scope.getAssignedTicketsById(localStorage.getItem('id'));
                 	$('#viewTicket').modal('toggle');
                 });
         	
