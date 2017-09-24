@@ -91,7 +91,7 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
                     $scope.openTicketCount++;
                 } else if (ticket.status == 'close') {
                     $scope.closeTicketCount++;
-                } else if (user.role == 'rejected') {
+                } else if (ticket.status == 'rejected') {
                     $scope.rejectedTicketCount++
                 } else if (ticket.status == 'in-progress') {
                     $scope.inProgress++;
