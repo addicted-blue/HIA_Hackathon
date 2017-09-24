@@ -47,7 +47,7 @@ app
                 		console.log('done');
                 	})
                 	$('#viewTicket').modal('toggle');
-                    
+                    $scope.getTicketById(localStorage.getItem('id'));
                 });
         	
         }
