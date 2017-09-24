@@ -15,6 +15,7 @@ var User = require('./mongoose/models/user');
 var dashboard = require('./config/dashboard');
 var urlencode = require('urlencode');
 var msg = urlencode('hello js');
+const nodemailer = require('nodemailer');
 
 mongoose.connect(configDB.database);
 
@@ -193,6 +194,61 @@ app.get('/sms',(req,res,next)=>{
     http.request(options, callback).end();//url encode instalation need to use $ npm install urlencode*/
     
 });
+
+
+app.post('/email', (req, res) => {
+	  const output = `
+	    <p>SLA Breached Tickets</p>
+	    <h3>Ticket Details</h3>
+	    <ul>  
+	      <li>Ticket No: ${req.body.ticket1}</li>
+	      <li>Ticket No: ${req.body.ticket2}</li>
+	      <li>Ticket No: ${req.body.ticket3}</li>
+	      <li>Ticket No: ${req.body.ticket4}</li>
+	      <li>Ticket No: ${req.body.ticket5}</li>
+	      <li>Ticket No: ${req.body.ticket6}</li>
+	      <li>Ticket No: ${req.body.ticket7}</li>
+	    </ul>
+	    <h3>Action</h3>
+	    <p>${req.body.message}</p>
+	  `;
+
+	  // create reusable transporter object using the default SMTP transport
+	  let transporter = nodemailer.createTransport({
+	    host: 'mail.xtremehackers.com',
+	    port: 587,
+	    secure: false, // true for 465, false for other ports
+	    auth: {
+	        user: 'admin@xtremehackers.com', // generated ethereal user
+	        pass: '9696114433'  // generated ethereal password
+	    },
+	    tls:{
+	      rejectUnauthorized:false
+	    }
+	  });
+
+	  // setup email data with unicode symbols
+	  let mailOptions = {
+	      from: '"HIA IT Team" <admin@xtremehackers.com>', // sender address
+	      to: 'sunsunny.com@gmail.com', // list of receivers
+	      subject: 'SLA Report - HIA', // Subject line
+	      text: 'Hello', // plain text body
+	      html: output // html body
+	  };
+
+	  // send mail with defined transport object
+	  transporter.sendMail(mailOptions, (error, info) => {
+	      if (error) {
+	          return console.log(error);
+	      }
+	      console.log('Message sent: %s', info.messageId);   
+	      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+	      res.json('Email Sent');
+	  });
+});
+
+
 
 
 
