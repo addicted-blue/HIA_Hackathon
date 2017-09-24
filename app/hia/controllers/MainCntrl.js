@@ -44,6 +44,7 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
         localStorage.setItem('role', response.role);
         localStorage.setItem('id', response._id);
         localStorage.setItem('name', response.name);
+        localStorage.setItem('mobile', response.mobile);
         growlService.growl('Welcome ' + response.name, 'inverse');
 
             $scope.roleDashboard(response.role);

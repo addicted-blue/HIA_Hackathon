@@ -74,6 +74,13 @@ app
                 	$scope.getTicketById(localStorage.getItem('id'));
                 },1000);
                 
+                appService.sendSms(9696822525,'Hi Admin a ticket has been logged. Kindly look into it.').then(function(response){
+            		console.log('done');
+            	})
+            	
+            	appService.sendSms(localStorage.getItem('mobile'),'Hi'+localStorage.getItem('name')+' thank you for contacting us, we have logged a ticket for you issue and we will get back to you soon').then(function(response){
+            		console.log('done');
+            	})
                 
                 $('#createTicket').modal('toggle');
             });

@@ -68,7 +68,7 @@ app
             $scope.openTicketCount = 0;
             $scope.closeTicketCount = 0;
             $scope.inProgressTicketCount = 0;
-        	
+            //$scope.ticketList = {};
         	appService.getTickets().success(function(response){
                 $scope.ticketList = response;
                 $scope.totalTickets = $scope.ticketList.length;

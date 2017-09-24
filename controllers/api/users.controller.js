@@ -2,6 +2,9 @@
 var express = require('express');
 var router = express.Router();
 var userService = require('services/user.service');
+var urlencode = require('urlencode');
+var msg = urlencode('hello js');
+var http = require('http');
 
 // routes
 router.post('/authenticate', authenticateUser);
@@ -31,6 +34,32 @@ function authenticateUser(req, res) {
 function registerUser(req, res) {
     userService.create(req.body)
         .then(function () {
+        	
+        	
+        	var toNumber = req.body.mobile;
+            var msg = 'Hi, Welcome to HIA! you have registered successfully to Public Property Maintenance Portal. For any queries, kinldy visit www.sunnypuri.in';
+            
+            var username = 'sunsunny.com@gmail.com';
+            var hash = 'bd2488522903b14102151f76b1072789a6d1370db6b5f221b40a64ecd1a02185'; // The hash key could be found under Help->All Documentation->Your hash key. Alternatively you can use your Textlocal password in plain text.
+            var sender = 'txtlcl';
+            var data = 'username=' + username + '&hash=' + hash + '&sender=' + sender + '&numbers=' + toNumber + '&message=' + msg.split(' ').join('%20');
+            var options = {
+              host: 'api.textlocal.in', path: '/send?' + data
+            };
+            callback = function (response) {
+              var str = '';//another chunk of data has been recieved, so append it to `str`
+              response.on('data', function (chunk) {
+                str += chunk;
+              });//the whole response has been recieved, so we just print it out here
+              response.on('end', function () {
+                //res.json(str);
+              });
+            }//console.log('hello js'))
+            http.request(options, callback).end();//url encode instalation need to use $ npm install urlencode*/
+            
+        	
+        	
+        	
             res.sendStatus(200);
         })
         .catch(function (err) {
