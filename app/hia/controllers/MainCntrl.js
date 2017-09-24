@@ -253,6 +253,11 @@ app.controller("MainController", ['$scope', '$http', '$timeout', '$window', '$lo
                         type: 'category',
                         categories: monthNames
                     }
+                },zoom: {
+                    enabled: true
+                },
+                subchart: {
+                    show: true
                 }
             });
         }
